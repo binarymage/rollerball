@@ -4,6 +4,16 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
     public float speed;
+    private int count;
+    public GUIText countText;
+    public GUIText winText;
+
+    void Start()
+    {
+        count = 0;
+        SetCountText();
+        winText.text = "";
+    }
 
     void FixedUpdate()
     {
@@ -20,6 +30,17 @@ public class PlayerController : MonoBehaviour {
         if (other.gameObject.CompareTag("PickUp"))
         {
             other.gameObject.SetActive(false);
+            count++;
+            SetCountText();
+        }
+    }
+
+    void SetCountText()
+    {
+        countText.text = "Count: " + count.ToString();
+        if (count >= 12)
+        {
+            winText.text = "You WIN! YAY! A WINNER IS YOU!!";
         }
     }
 }
